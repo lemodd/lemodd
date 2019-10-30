@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://lemodd.github.io</id>
+    <title>LEMO</title>
+    <updated>2019-10-30T13:41:26.466Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://lemodd.github.io"/>
+    <link rel="self" href="https://lemodd.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://lemodd.github.io/images/avatar.png</logo>
+    <icon>https://lemodd.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2019, LEMO</rights>
+    <entry>
+        <title type="html"><![CDATA[小学生4位数进位加法竖式题（一）]]></title>
+        <id>https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti</id>
+        <link href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti">
+        </link>
+        <updated>2019-10-30T02:12:46.000Z</updated>
+        <summary type="html"><![CDATA[<p>老师👩‍🎓留作业要求家长每天要给小朋友👦出15道“4位数进位加法竖式题”，虽说这并不考验什么智商，但是每天要找张纸📝，一道道地出题，再加上我的字还是太入眼了，总这是让人不爽。<br>
+但是自从有了Python大法一切都简单了。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>老师👩‍🎓留作业要求家长每天要给小朋友👦出15道“4位数进位加法竖式题”，虽说这并不考验什么智商，但是每天要找张纸📝，一道道地出题，再加上我的字还是太入眼了，总这是让人不爽。<br>
+但是自从有了Python大法一切都简单了。</p>
+<!-- more -->
+<p><strong>先看下最终效果</strong><br>
+<img src="https://lemodd.github.io/post-images/1572408824834.jpg" alt=""></p>
+<h3 id="1-从无到有">1. 从无到有</h3>
+<p>每道题要随机生成，这就需要产生两个随机的4位数，第一个4位加数叫a</p>
+<pre><code class="language-python"> a = [str(random.randint(1,9)) for i in range(4)] 
+</code></pre>
+<p>这是一个4个长度的列表，需转换为字符串。</p>
+<pre><code class="language-python"> astr = &quot;&quot;.join(a) 
+</code></pre>
+<p>写成一个函数</p>
+<pre><code class="language-python">def af():
+   a = [str(random.randint(1,9)) for i in range(4)]
+   astr = &quot;&quot;.join(a)
+   astr = &quot; &quot;+astr #加一个空格是为了与保持与第二个数对齐
+   return astr
+</code></pre>
+<p>另一个4位加数叫b，同样写成函数</p>
+<pre><code class="language-python">def bf():
+   b = [str(random.randint(1,9)) for i in range(4)]
+   bstr = &quot;&quot;.join(b)
+   bstr = &quot;+&quot;+bstr
+   return astr
+</code></pre>
+<p>最后将生成的式子写到一个文件内</p>
+<pre><code class="language-python">with open('hw.txt','w') as f:
+    f.write(af())
+    f.write(&quot;\n&quot;)
+    f.write(bf())
+    f.write(&quot; &quot;*5)
+</code></pre>
+<p>看下运行的效果<br>
+<img src="https://lemodd.github.io/post-images/1572412989603.jpg" alt=""><br>
+已经有了初步的样子，主要问题是对不齐，不要紧修改下，直接生成.doc文件试试看🙏。<br>
+将字体设为黑体，二号字，效果还不错嘛!😁<br>
+<img src="https://lemodd.github.io/post-images/1572413218360.jpg" alt=""><br>
+进一步完善，加上底部的横线，并且每行三个坚式，<br>
+将字体设为黑体，二号字，行距20，左对齐。最终效果如下<br>
+<img src="https://lemodd.github.io/post-images/1572413488928.jpg" alt=""><br>
+非常完美，点击打印。。。臭小子👶，每天放学有的你做了，哈哈哈😏<br>
+最终代码如下</p>
+<pre><code class="language-python">
+import random
+
+def af():
+    a = [str(random.randint(1,9)) for i in range(4)]
+    astr = &quot;&quot;.join(a)
+    astr = &quot; &quot;+astr
+    return astr
+def bf():
+    b = [str(random.randint(1,9)) for i in range(4)]
+    bstr = &quot;&quot;.join(b)
+    bstr = &quot;+&quot;+bstr
+    return bstr
+    
+with open('hw.doc','w') as f:
+    for i in range(6*6):
+        f.write(af())
+        f.write(&quot; &quot;*5)
+        f.write(af())
+        f.write(&quot; &quot;*5)
+        f.write(af())
+        f.write(&quot;\n&quot;)
+        
+        f.write(bf())
+        f.write(&quot; &quot;*5)
+        f.write(bf())
+        f.write(&quot; &quot;*5)
+        f.write(bf())
+        f.write(&quot;\n&quot;)
+        
+        f.write(&quot;-&quot;*5)
+        f.write(&quot; &quot;*5)
+        f.write(&quot;-&quot;*5)
+        f.write(&quot; &quot;*5)
+        f.write(&quot;-&quot;*5)
+        f.write(&quot; &quot;*5)
+        f.write(&quot;\n&quot;)
+        f.write(&quot;\n&quot;)
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[华硕RT-AC68U 格林固件 科学上网]]></title>
+        <id>https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang</id>
+        <link href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang">
+        </link>
+        <updated>2019-10-30T00:23:34.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="账号设置">账号设置</h2>
+<figure data-type="image" tabindex="1"><img src="https://lemodd.github.io/post-images/1572395069830.png" alt=""></figure>
+<h2 id="kcp加速设置">KCP加速设置</h2>
+<figure data-type="image" tabindex="2"><img src="https://lemodd.github.io/post-images/1572395145992.png" alt=""></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://lemodd.github.io/post/hello-gridea</id>
+        <link href="https://lemodd.github.io/post/hello-gridea">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+</feed>
