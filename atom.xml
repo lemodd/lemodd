@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-10-31T11:01:53.878Z</updated>
+    <updated>2019-10-31T14:55:38.254Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -10,6 +10,20 @@
     <logo>https://lemodd.github.io/images/avatar.png</logo>
     <icon>https://lemodd.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, LEMO</rights>
+    <entry>
+        <title type="html"><![CDATA[能在马路上跑步吗？]]></title>
+        <id>https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma</id>
+        <link href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma">
+        </link>
+        <updated>2019-10-31T14:44:05.000Z</updated>
+        <content type="html"><![CDATA[<p>--爸爸，小朋友能在马路上跑步吗？<br>
+--不能，马路上全是车，太危险！<br>
+--哪大人能在马路上跑步吗？<br>
+--也不能！<br>
+--那为什么马拉松就在马路上跑呢！？<br>
+--😰</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[我就静静地看你装]]></title>
         <id>https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang</id>
