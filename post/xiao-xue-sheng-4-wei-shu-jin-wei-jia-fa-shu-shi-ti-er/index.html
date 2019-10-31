@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>小学生4位数进位加法竖式题（一） | LEMO</title>
+<title>小学生4位数进位加法竖式题（二） | LEMO</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572519490984">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,7 +73,7 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              小学生4位数进位加法竖式题（一）
+              小学生4位数进位加法竖式题（二）
             </h2>
             <div class="post-info">
               <span>
@@ -89,54 +89,74 @@
               
             </div>
             
-              <img class="post-feature-image" src="https://lemodd.github.io/post-images/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti.jpg" alt="">
+              <img class="post-feature-image" src="https://lemodd.github.io/post-images/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>老师👩‍🎓留作业要求家长每天要给小朋友👦出15道“4位数进位加法竖式题”，虽说这并不考验什么智商，但是每天要找张纸📝，一道道地出题，再加上我的字还是太入眼了，总这是让人不爽。<br>
-但是自从有了Python大法一切都简单了。</p>
-<!-- more -->
-<p><strong>先看下最终效果</strong><br>
-<img src="https://lemodd.github.io/post-images/1572408824834.jpg" alt=""></p>
-<h3 id="1-从无到有">1. 从无到有</h3>
-<p>每道题要随机生成，这就需要产生两个随机的4位数，第一个4位加数叫a</p>
-<pre><code class="language-python"> a = [str(random.randint(1,9)) for i in range(4)] 
+                <h3 id="2从有到好">2.从有到好</h3>
+<p>上篇已实现了出题的基本功能，但是还需要手动调整格式，还不是那么完美。<br>
+本篇将使用python-docx真正的生成word文档。<br>
+安装python-docx</p>
+<pre><code class="language-python">pip install python-docx
 </code></pre>
-<p>这是一个4个长度的列表，需转换为字符串。</p>
-<pre><code class="language-python"> astr = &quot;&quot;.join(a) 
+<p>测试下有没有安装成功</p>
+<pre><code class="language-python">from  docx import  Document
+#新建文档
+document = Document()
+#添加文本
+paragraph = document.add_paragraph('添加了文本')
+#保存
+document.save(&quot;test3.docx&quot;)
 </code></pre>
-<p>写成一个函数</p>
-<pre><code class="language-python">def af():
-   a = [str(random.randint(1,9)) for i in range(4)]
-   astr = &quot;&quot;.join(a)
-   astr = &quot; &quot;+astr #加一个空格是为了与保持与第二个数对齐
-   return astr
+<p>打开生成的docx文件<br>
+<img src="https://lemodd.github.io/post-images/1572512200314.png" alt=""><br>
+成功安装，下一步就是把之前的af()和bf()放进来了</p>
+<pre><code class="language-python">for i in range(5):
+    for j in range(3):
+        document.add_paragraph(af())
+    document.add_paragraph('\n')
+    for k in range(3):
+        document.add_paragraph(bf())
 </code></pre>
-<p>另一个4位加数叫b，同样写成函数</p>
-<pre><code class="language-python">def bf():
-   b = [str(random.randint(1,9)) for i in range(4)]
-   bstr = &quot;&quot;.join(b)
-   bstr = &quot;+&quot;+bstr
-   return astr
+<p>貌似不错，生成算式，一行3个，一共五行，哈哈<br>
+<img src="https://lemodd.github.io/post-images/1572512668799.png" alt=""><br>
+咦!?怎么都在一列上了，原来document.add_paragraph()，每次都是新加一行，把代码改下</p>
+<pre><code class="language-python">for i in range(1):
+    for j in range(3):
+        s = af() + &quot;       &quot;+af()+ &quot;       &quot;+af()
+        document.add_paragraph(s)
+        s = bf() + &quot;       &quot;+bf()+ &quot;       &quot;+bf()
+        document.add_paragraph(s)
+        document.add_paragraph(&quot;-&quot;*40)
+        document.add_paragraph()
 </code></pre>
-<p>最后将生成的式子写到一个文件内</p>
-<pre><code class="language-python">with open('hw.txt','w') as f:
-    f.write(af())
-    f.write(&quot;\n&quot;)
-    f.write(bf())
-    f.write(&quot; &quot;*5)
+<p>大体有个样子了，但是还是对不齐。<br>
+<img src="https://lemodd.github.io/post-images/1572513326651.png" alt=""><br>
+这时突然想到可以用表格啊，把式子放到表格里，不就自然对齐了吗！</p>
+<pre><code class="language-python">table = document.add_table(rows = 10, cols = 3)
+for row in range(0,10,2):
+    for i in range(3):
+        table.cell(row,i).text = af()+&quot;\n&quot;+bf()
+        #右对齐
+        table.cell(row,i).paragraphs[0].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 </code></pre>
-<p>看下运行的效果<br>
-<img src="https://lemodd.github.io/post-images/1572412989603.jpg" alt=""><br>
-已经有了初步的样子，主要问题是对不齐，不要紧修改下，直接生成.doc文件试试看🙏。<br>
-将字体设为黑体，二号字，效果还不错嘛!😁<br>
-<img src="https://lemodd.github.io/post-images/1572413218360.jpg" alt=""><br>
-进一步完善，加上底部的横线，并且每行三个坚式，<br>
-将字体设为黑体，二号字，行距20，左对齐。最终效果如下<br>
-<img src="https://lemodd.github.io/post-images/1572413488928.jpg" alt=""><br>
-非常完美，点击打印。。。臭小子👶，每天放学有的你做了，哈哈哈😏<br>
-最终代码如下</p>
-<pre><code class="language-python">
+<p>效果如下<br>
+<img src="https://lemodd.github.io/post-images/1572513553210.png" alt=""><br>
+对齐的问题解决了，就是默认word不显示表格线，需要手动加下。<br>
+<img src="https://lemodd.github.io/post-images/1572513645737.png" alt=""><br>
+为了保护小朋友的眼睛，加大字号，顺便改下字体。</p>
+<pre><code class="language-python">document.styles['Normal'].font.name = u'黑体'
+document.styles['Normal'].font.size = 360000
+document.styles['Normal']._element.rPr.rFonts.set(qn('w:eastAsia'), u'黑体')
+</code></pre>
+<p>再加上“姓名，得分和日期”，效果如下<br>
+<img src="https://lemodd.github.io/post-images/1572514157872.png" alt=""><br>
+如果感觉太单调，可以设置下表格样式，如下<br>
+<img src="https://lemodd.github.io/post-images/1572514334510.png" alt=""><br>
+最后完整代码如下</p>
+<pre><code class="language-python">from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
 import random
 
 def af():
@@ -144,36 +164,29 @@ def af():
     astr = &quot;&quot;.join(a)
     astr = &quot; &quot;+astr
     return astr
+
 def bf():
     b = [str(random.randint(1,9)) for i in range(4)]
     bstr = &quot;&quot;.join(b)
-    bstr = &quot;+&quot;+bstr
+    bstr = &quot;+ &quot;+bstr
     return bstr
-    
-with open('hw.doc','w') as f:
-    for i in range(6*6):
-        f.write(af())
-        f.write(&quot; &quot;*5)
-        f.write(af())
-        f.write(&quot; &quot;*5)
-        f.write(af())
-        f.write(&quot;\n&quot;)
-        
-        f.write(bf())
-        f.write(&quot; &quot;*5)
-        f.write(bf())
-        f.write(&quot; &quot;*5)
-        f.write(bf())
-        f.write(&quot;\n&quot;)
-        
-        f.write(&quot;-&quot;*5)
-        f.write(&quot; &quot;*5)
-        f.write(&quot;-&quot;*5)
-        f.write(&quot; &quot;*5)
-        f.write(&quot;-&quot;*5)
-        f.write(&quot; &quot;*5)
-        f.write(&quot;\n&quot;)
-        f.write(&quot;\n&quot;)
+
+document = Document()
+
+document.styles['Normal'].font.name = u'黑体'
+document.styles['Normal'].font.size = 360000
+document.styles['Normal']._element.rPr.rFonts.set(qn('w:eastAsia'), u'黑体')
+
+document.add_paragraph('姓名____  得分____   日期_____')
+
+table = document.add_table(rows = 10, cols = 3)
+
+for row in range(0,10,2):
+    for i in range(3):
+        table.cell(row,i).text = af()+&quot;\n&quot;+bf()
+        table.cell(row,i).paragraphs[0].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+document.save(&quot;quiz.docx&quot;)
 </code></pre>
 
               </div>
@@ -183,7 +196,7 @@ with open('hw.doc','w') as f:
 <ul>
 <li>
 <ul>
-<li><a href="#1-%E4%BB%8E%E6%97%A0%E5%88%B0%E6%9C%89">1. 从无到有</a></li>
+<li><a href="#2%E4%BB%8E%E6%9C%89%E5%88%B0%E5%A5%BD">2.从有到好</a></li>
 </ul>
 </li>
 </ul>
@@ -198,9 +211,9 @@ with open('hw.doc','w') as f:
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang">
+            <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti">
               <h3 class="post-title">
-                华硕RT-AC68U 格林固件 科学上网
+                小学生4位数进位加法竖式题（一）
               </h3>
             </a>
           </div>

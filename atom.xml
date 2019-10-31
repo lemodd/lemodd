@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-10-31T08:17:29.146Z</updated>
+    <updated>2019-10-31T10:59:02.727Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -27,6 +27,109 @@
 宝一脸鄙视地说：“老师打电话的时候我就在旁边，<br>
 听到老师说，‘是小宝妈妈吗？。。。’。”<br>
 宝妈🤤</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[小学生4位数进位加法竖式题（二）]]></title>
+        <id>https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er</id>
+        <link href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er">
+        </link>
+        <updated>2019-10-30T07:00:38.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="2从有到好">2.从有到好</h3>
+<p>上篇已实现了出题的基本功能，但是还需要手动调整格式，还不是那么完美。<br>
+本篇将使用python-docx真正的生成word文档。<br>
+安装python-docx</p>
+<pre><code class="language-python">pip install python-docx
+</code></pre>
+<p>测试下有没有安装成功</p>
+<pre><code class="language-python">from  docx import  Document
+#新建文档
+document = Document()
+#添加文本
+paragraph = document.add_paragraph('添加了文本')
+#保存
+document.save(&quot;test3.docx&quot;)
+</code></pre>
+<p>打开生成的docx文件<br>
+<img src="https://lemodd.github.io/post-images/1572512200314.png" alt=""><br>
+成功安装，下一步就是把之前的af()和bf()放进来了</p>
+<pre><code class="language-python">for i in range(5):
+    for j in range(3):
+        document.add_paragraph(af())
+    document.add_paragraph('\n')
+    for k in range(3):
+        document.add_paragraph(bf())
+</code></pre>
+<p>貌似不错，生成算式，一行3个，一共五行，哈哈<br>
+<img src="https://lemodd.github.io/post-images/1572512668799.png" alt=""><br>
+咦!?怎么都在一列上了，原来document.add_paragraph()，每次都是新加一行，把代码改下</p>
+<pre><code class="language-python">for i in range(1):
+    for j in range(3):
+        s = af() + &quot;       &quot;+af()+ &quot;       &quot;+af()
+        document.add_paragraph(s)
+        s = bf() + &quot;       &quot;+bf()+ &quot;       &quot;+bf()
+        document.add_paragraph(s)
+        document.add_paragraph(&quot;-&quot;*40)
+        document.add_paragraph()
+</code></pre>
+<p>大体有个样子了，但是还是对不齐。<br>
+<img src="https://lemodd.github.io/post-images/1572513326651.png" alt=""><br>
+这时突然想到可以用表格啊，把式子放到表格里，不就自然对齐了吗！</p>
+<pre><code class="language-python">table = document.add_table(rows = 10, cols = 3)
+for row in range(0,10,2):
+    for i in range(3):
+        table.cell(row,i).text = af()+&quot;\n&quot;+bf()
+        #右对齐
+        table.cell(row,i).paragraphs[0].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+</code></pre>
+<p>效果如下<br>
+<img src="https://lemodd.github.io/post-images/1572513553210.png" alt=""><br>
+对齐的问题解决了，就是默认word不显示表格线，需要手动加下。<br>
+<img src="https://lemodd.github.io/post-images/1572513645737.png" alt=""><br>
+为了保护小朋友的眼睛，加大字号，顺便改下字体。</p>
+<pre><code class="language-python">document.styles['Normal'].font.name = u'黑体'
+document.styles['Normal'].font.size = 360000
+document.styles['Normal']._element.rPr.rFonts.set(qn('w:eastAsia'), u'黑体')
+</code></pre>
+<p>再加上“姓名，得分和日期”，效果如下<br>
+<img src="https://lemodd.github.io/post-images/1572514157872.png" alt=""><br>
+如果感觉太单调，可以设置下表格样式，如下<br>
+<img src="https://lemodd.github.io/post-images/1572514334510.png" alt=""><br>
+最后完整代码如下</p>
+<pre><code class="language-python">from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
+import random
+
+def af():
+    a = [str(random.randint(1,9)) for i in range(4)]
+    astr = &quot;&quot;.join(a)
+    astr = &quot; &quot;+astr
+    return astr
+
+def bf():
+    b = [str(random.randint(1,9)) for i in range(4)]
+    bstr = &quot;&quot;.join(b)
+    bstr = &quot;+ &quot;+bstr
+    return bstr
+
+document = Document()
+
+document.styles['Normal'].font.name = u'黑体'
+document.styles['Normal'].font.size = 360000
+document.styles['Normal']._element.rPr.rFonts.set(qn('w:eastAsia'), u'黑体')
+
+document.add_paragraph('姓名____  得分____   日期_____')
+
+table = document.add_table(rows = 10, cols = 3)
+
+for row in range(0,10,2):
+    for i in range(3):
+        table.cell(row,i).text = af()+&quot;\n&quot;+bf()
+        table.cell(row,i).paragraphs[0].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+document.save(&quot;quiz.docx&quot;)
+</code></pre>
 ]]></content>
     </entry>
     <entry>
