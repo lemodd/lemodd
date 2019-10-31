@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | LEMO</title>
+<title>Python调用默认打印机 | LEMO</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572537146100">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,43 +73,75 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              Python调用默认打印机
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2019-10-31
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-<h2 id="关于本站">🏠 关于本站</h2>
-<pre><code>lemo    
+                <p>  有时候需要打印很多资料，一个个手动打印直是繁琐又浪费时间，Python真是各种懒癌晚期的特效药💊啊。<br>
+  经过一翻搜索终于找到了方法。需要用到win32api和win32print两个模块。</p>
+<!-- more -->
+<h2 id="1-安装所需库">1. 安装所需库</h2>
+<p>只要安装<code>pywin32</code>库就可以使用win32api和win32print两个模块。</p>
+<pre><code class="language-python">pip install pywin32
 </code></pre>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<pre><code>lemodd
+<h2 id="2-所用的函数">2. 所用的函数</h2>
+<pre><code class="language-python">win32api.ShellExcute(hWnd，Operation，FileName，
+                     Parameters，Directory，ShowCmd)
 </code></pre>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<pre><code>python
+<p>各参数的意义如下：</p>
+<pre><code class="language-python">  hWnd: HWND;        {指定父窗口句柄}
+  Operation: PChar;  {指定动作, 譬如: open、print}
+  FileName: PChar;   {指定要打开的文件或程序}
+  Parameters: PChar; {给要打开的程序指定参数; 如果打开的是文件这里应该是 nil}
+  Directory: PChar;  {缺省目录}
+  ShowCmd: Integer   {打开选项}
 </code></pre>
-<h2 id="联系我呀">📬 联系我呀</h2>
-<pre><code>lemodd@gmail.com
+<p>执行成功会返回应用程序句柄; 如果这个值 &lt;= 32, 表示执行错误</p>
+<h2 id="3-包装为一个函数">3. 包装为一个函数</h2>
+<pre><code class="language-python🖨">import win32api
+import win32print
+
+def send2printer(filename):
+     win32api.ShellExecute (
+       0,
+       &quot;print&quot;,
+       filename,
+       '/d:&quot;%s&quot;' % win32print.GetDefaultPrinter (),
+       &quot;.&quot;,
+       0
+     )
+
+if __name__ == &quot;__main__&quot;:
+    send2printer('TEST.docx')
 </code></pre>
+<h2 id="4实现批量打印">4.实现批量打印</h2>
+<p>如果有巨量的文件要打印，比如打印当前目录下所有的 <em>.docx</em> 文件，可以这样做</p>
+<pre><code class="language-python">import glob
+if __name__ == &quot;__main__&quot;:
+    for filename in glob.glob('*.docx'):
+        send2printer(filename)
+</code></pre>
+<p>是不是很简单。🎉</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#1-%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93">1. 安装所需库</a></li>
+<li><a href="#2-%E6%89%80%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0">2. 所用的函数</a></li>
+<li><a href="#3-%E5%8C%85%E8%A3%85%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">3. 包装为一个函数</a></li>
+<li><a href="#4%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E6%89%93%E5%8D%B0">4.实现批量打印</a></li>
 </ul>
 </li>
 </ul>
@@ -119,6 +151,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma">
+              <h3 class="post-title">
+                能在马路上跑步吗？
+              </h3>
+            </a>
+          </div>
         
 
         
