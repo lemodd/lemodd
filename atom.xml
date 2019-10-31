@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-10-30T14:26:39.724Z</updated>
+    <updated>2019-10-31T08:14:23.745Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -10,6 +10,25 @@
     <logo>https://lemodd.github.io/images/avatar.png</logo>
     <icon>https://lemodd.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, LEMO</rights>
+    <entry>
+        <title type="html"><![CDATA[我就静静地看你装]]></title>
+        <id>https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang</id>
+        <link href="https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang">
+        </link>
+        <updated>2019-10-31T00:30:39.000Z</updated>
+        <content type="html"><![CDATA[<p>小宝从幼儿园回家，本来就在幼儿园吃过饭了，<br>
+宝妈为了让她再吃点绿叶菜，喝点粥，就说：<br>
+“今天张老师给我打电话了。”<br>
+宝就问：“老师说什么了”。<br>
+“说你在幼儿园表现特别好，爱劳动，积极回答问题，<br>
+现在也爱吃菜了，blabla...，所以把粥喝了，菜吃完吧😊”<br>
+宝疑惑地说：“我怎么没听到？”。<br>
+“老师在外面打的，你怎么听得到”<br>
+宝一脸鄙视地说：“老师打电话的时候我就在旁边，<br>
+听到老师说，‘是小宝妈妈吗？。。。’。”<br>
+宝妈🤤</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[小学生4位数进位加法竖式题（一）]]></title>
         <id>https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti</id>

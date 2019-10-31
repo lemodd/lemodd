@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>小学生4位数进位加法竖式题（一） | LEMO</title>
+<title>我就静静地看你装 | LEMO</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572509291910">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,123 +73,41 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              小学生4位数进位加法竖式题（一）
+              我就静静地看你装
             </h2>
             <div class="post-info">
               <span>
-                2019-10-30
+                2019-10-31
               </span>
               <span>
-                3 min read
+                1 min read
               </span>
               
-                <a href="https://lemodd.github.io/tag/dYLsqWL-Y" class="post-tag">
-                  # Python
+                <a href="https://lemodd.github.io/tag/yYU8f_WMH" class="post-tag">
+                  # 小宝语录
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://lemodd.github.io/post-images/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti.jpg" alt="">
+              <img class="post-feature-image" src="https://lemodd.github.io/post-images/wo-jiu-jing-jing-di-kan-ni-zhuang.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>老师👩‍🎓留作业要求家长每天要给小朋友👦出15道“4位数进位加法竖式题”，虽说这并不考验什么智商，但是每天要找张纸📝，一道道地出题，再加上我的字还是太入眼了，总这是让人不爽。<br>
-但是自从有了Python大法一切都简单了。</p>
-<!-- more -->
-<p><strong>先看下最终效果</strong><br>
-<img src="https://lemodd.github.io/post-images/1572408824834.jpg" alt=""></p>
-<h3 id="1-从无到有">1. 从无到有</h3>
-<p>每道题要随机生成，这就需要产生两个随机的4位数，第一个4位加数叫a</p>
-<pre><code class="language-python"> a = [str(random.randint(1,9)) for i in range(4)] 
-</code></pre>
-<p>这是一个4个长度的列表，需转换为字符串。</p>
-<pre><code class="language-python"> astr = &quot;&quot;.join(a) 
-</code></pre>
-<p>写成一个函数</p>
-<pre><code class="language-python">def af():
-   a = [str(random.randint(1,9)) for i in range(4)]
-   astr = &quot;&quot;.join(a)
-   astr = &quot; &quot;+astr #加一个空格是为了与保持与第二个数对齐
-   return astr
-</code></pre>
-<p>另一个4位加数叫b，同样写成函数</p>
-<pre><code class="language-python">def bf():
-   b = [str(random.randint(1,9)) for i in range(4)]
-   bstr = &quot;&quot;.join(b)
-   bstr = &quot;+&quot;+bstr
-   return astr
-</code></pre>
-<p>最后将生成的式子写到一个文件内</p>
-<pre><code class="language-python">with open('hw.txt','w') as f:
-    f.write(af())
-    f.write(&quot;\n&quot;)
-    f.write(bf())
-    f.write(&quot; &quot;*5)
-</code></pre>
-<p>看下运行的效果<br>
-<img src="https://lemodd.github.io/post-images/1572412989603.jpg" alt=""><br>
-已经有了初步的样子，主要问题是对不齐，不要紧修改下，直接生成.doc文件试试看🙏。<br>
-将字体设为黑体，二号字，效果还不错嘛!😁<br>
-<img src="https://lemodd.github.io/post-images/1572413218360.jpg" alt=""><br>
-进一步完善，加上底部的横线，并且每行三个坚式，<br>
-将字体设为黑体，二号字，行距20，左对齐。最终效果如下<br>
-<img src="https://lemodd.github.io/post-images/1572413488928.jpg" alt=""><br>
-非常完美，点击打印。。。臭小子👶，每天放学有的你做了，哈哈哈😏<br>
-最终代码如下</p>
-<pre><code class="language-python">
-import random
-
-def af():
-    a = [str(random.randint(1,9)) for i in range(4)]
-    astr = &quot;&quot;.join(a)
-    astr = &quot; &quot;+astr
-    return astr
-def bf():
-    b = [str(random.randint(1,9)) for i in range(4)]
-    bstr = &quot;&quot;.join(b)
-    bstr = &quot;+&quot;+bstr
-    return bstr
-    
-with open('hw.doc','w') as f:
-    for i in range(6*6):
-        f.write(af())
-        f.write(&quot; &quot;*5)
-        f.write(af())
-        f.write(&quot; &quot;*5)
-        f.write(af())
-        f.write(&quot;\n&quot;)
-        
-        f.write(bf())
-        f.write(&quot; &quot;*5)
-        f.write(bf())
-        f.write(&quot; &quot;*5)
-        f.write(bf())
-        f.write(&quot;\n&quot;)
-        
-        f.write(&quot;-&quot;*5)
-        f.write(&quot; &quot;*5)
-        f.write(&quot;-&quot;*5)
-        f.write(&quot; &quot;*5)
-        f.write(&quot;-&quot;*5)
-        f.write(&quot; &quot;*5)
-        f.write(&quot;\n&quot;)
-        f.write(&quot;\n&quot;)
-</code></pre>
+                <p>小宝从幼儿园回家，本来就在幼儿园吃过饭了，<br>
+宝妈为了让她再吃点绿叶菜，喝点粥，就说：<br>
+“今天张老师给我打电话了。”<br>
+宝就问：“老师说什么了”。<br>
+“说你在幼儿园表现特别好，爱劳动，积极回答问题，<br>
+现在也爱吃菜了，blabla...，所以把粥喝了，菜吃完吧😊”<br>
+宝疑惑地说：“我怎么没听到？”。<br>
+“老师在外面打的，你怎么听得到”<br>
+宝一脸鄙视地说：“老师打电话的时候我就在旁边，<br>
+听到老师说，‘是小宝妈妈吗？。。。’。”<br>
+宝妈🤤</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#1-%E4%BB%8E%E6%97%A0%E5%88%B0%E6%9C%89">1. 从无到有</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -198,9 +116,9 @@ with open('hw.doc','w') as f:
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang">
+            <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti">
               <h3 class="post-title">
-                华硕RT-AC68U 格林固件 科学上网
+                小学生4位数进位加法竖式题（一）
               </h3>
             </a>
           </div>
