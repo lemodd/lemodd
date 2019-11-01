@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python调用默认打印机 | LEMO</title>
 <meta name="description" content="温故而知新" />
-<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572565432621">
+<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572609684277">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://lemodd.github.io/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lemodd.github.io">
-  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572565432621" alt="">
+  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572609684277" alt="">
   </a>
   <h1 class="site-title">
     LEMO
@@ -109,6 +109,17 @@
                 <p>  有时候需要打印很多资料，一个个手动打印直是繁琐又浪费时间，Python真是各种懒癌晚期的特效药💊啊。<br>
   经过一翻搜索终于找到了方法。需要用到win32api和win32print两个模块。</p>
 <!-- more -->
+<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93">1. 安装所需库</a></li>
+<li><a href="#2-%E6%89%80%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0">2. 所用的函数</a></li>
+<li><a href="#3-%E5%8C%85%E8%A3%85%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">3. 包装为一个函数</a></li>
+<li><a href="#4%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E6%89%93%E5%8D%B0">4.实现批量打印</a></li>
+</ul>
+</li>
+</ul>
+</p>
 <h2 id="1-安装所需库">1. 安装所需库</h2>
 <p>只要安装<code>pywin32</code>库就可以使用win32api和win32print两个模块。</p>
 <pre><code class="language-python">pip install pywin32
