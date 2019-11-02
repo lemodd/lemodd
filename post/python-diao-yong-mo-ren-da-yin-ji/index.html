@@ -1,112 +1,111 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" >
+
 <title>Python调用默认打印机 | LEMO</title>
-<meta name="description" content="温故而知新" />
-<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572609684277">
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572672003307">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://lemodd.github.io/styles/main.css">
 
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151342724-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-151342724-1');
-</script>
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://lemodd.github.io">
-  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572609684277" alt="">
-  </a>
-  <h1 class="site-title">
-    LEMO
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://lemodd.github.io">
+        <img src="https://lemodd.github.io/images/avatar.png?v=1572672003307" class="site-logo">
+        <h1 class="site-title">LEMO</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
       
-        <a href="/" class="menu">
-          首页
-        </a>
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
       
-    
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
       
-        <a href="/archives" class="menu">
-          归档
-        </a>
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
       
-    
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
       
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
+    </div>
   </div>
-  <div class="social-container">
-    
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
       
-    
+        
       
-    
+        
       
-    
+        
       
-    
+        
       
-    
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lemodd.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
   </div>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              Python调用默认打印机
-            </h2>
-            <div class="post-info">
-              <span>
-                2019-10-31
-              </span>
-              <span>
-                2 min read
-              </span>
-              
-                <a href="https://lemodd.github.io/tag/TmWk-zpCt" class="post-tag">
-                  # 办公
-                </a>
-              
-                <a href="https://lemodd.github.io/tag/dYLsqWL-Y" class="post-tag">
-                  # Python
-                </a>
-              
-            </div>
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Python调用默认打印机</h2>
+            <div class="post-date">2019-10-31</div>
             
-              <img class="post-feature-image" src="https://lemodd.github.io/post-images/python-diao-yong-mo-ren-da-yin-ji.png" alt="">
+              <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/python-diao-yong-mo-ren-da-yin-ji.png')">
+              </div>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>  有时候需要打印很多资料，一个个手动打印直是繁琐又浪费时间，Python真是各种懒癌晚期的特效药💊啊。<br>
+            <div class="post-content">
+              <p>  有时候需要打印很多资料，一个个手动打印直是繁琐又浪费时间，Python真是各种懒癌晚期的特效药💊啊。<br>
   经过一翻搜索终于找到了方法。需要用到win32api和win32print两个模块。</p>
 <!-- more -->
 <p><ul class="markdownIt-TOC">
@@ -163,110 +162,87 @@ if __name__ == &quot;__main__&quot;:
 </code></pre>
 <p>是不是很简单。🎉</p>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#1-%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93">1. 安装所需库</a></li>
-<li><a href="#2-%E6%89%80%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0">2. 所用的函数</a></li>
-<li><a href="#3-%E5%8C%85%E8%A3%85%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">3. 包装为一个函数</a></li>
-<li><a href="#4%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E6%89%93%E5%8D%B0">4.实现批量打印</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
             </div>
-          </article>
-        </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://lemodd.github.io/tag/TmWk-zpCt" class="tag">
+                    办公
+                  </a>
+                
+                  <a href="https://lemodd.github.io/tag/dYLsqWL-Y" class="tag">
+                    Python
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma">
+                  <h3 class="post-title">
+                    能在马路上跑步吗？
+                  </h3>
+                </a>
+              </div>
+            
 
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma">
-              <h3 class="post-title">
-                能在马路上跑步吗？
-              </h3>
-            </a>
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
           </div>
-        
 
-        
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: 'f3639563db0cb313203b',
-    clientSecret: '0c185c29f1ed362617ef5e25612cb4c73f2b0737',
-    repo: 'lemodd.github.io',
-    owner: 'lemodd',
-    admin: ['lemodd'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
-        
-
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://lemodd.github.io/atom.xml" target="_blank">RSS</a>
-</div>
-
-<script>
-  hljs.initHighlightingOnLoad()
-
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
-
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
-
-</script>
-
+        </div>
       </div>
     </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'f3639563db0cb313203b',
+        clientSecret: '0c185c29f1ed362617ef5e25612cb4c73f2b0737',
+        repo: 'lemodd.github.io',
+        owner: 'lemodd',
+        admin: ['lemodd'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
   </body>
 </html>
