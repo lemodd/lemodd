@@ -1,24 +1,16 @@
-
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LEMO</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572699954973">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572685734153">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://lemodd.github.io/styles/main.css">
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151342724-1"></script>
@@ -33,344 +25,45 @@
 
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://lemodd.github.io">
-        <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572685734153" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://lemodd.github.io">
-        <h1 class="site-title">LEMO</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lemodd.github.io">
+  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572699954973" alt="">
+  </a>
+  <h1 class="site-title">
+    LEMO
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="/" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-        
-          <a href="/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-        
-          <a href="/post/about" class="menu purple-link">
-            关于
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-        
-        
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/chi-ping-guo">
-        <h2 class="post-title">吃苹果</h2>
-      </a>
-      <div class="post-abstract">
-        <p>宝妈给宝定了个规矩，每天吃一个苹果🍎。<br>
-一天，宝儿在忙着玩玩具，爷爷给宝儿削了个苹果，可是宝不愿意放下玩具🚀。<br>
-&quot;吃了苹果我给你买奥特曼。”，爷爷说。<br>
-宝儿不情愿地拿起了苹果。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-11-02</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/M8cKEKr0K">
-                童言稚语
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/python-diao-yong-mo-ren-da-yin-ji">
-        <h2 class="post-title">Python调用默认打印机</h2>
-      </a>
-      <div class="post-abstract">
-        <p>  有时候需要打印很多资料，一个个手动打印直是繁琐又浪费时间，Python真是各种懒癌晚期的特效药💊啊。<br>
-  经过一翻搜索终于找到了方法。需要用到win32api和win32print两个模块。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-10-31</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/TmWk-zpCt">
-                办公
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://lemodd.github.io/tag/dYLsqWL-Y">
-                Python
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://lemodd.github.io/post/python-diao-yong-mo-ren-da-yin-ji">
-        <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/python-diao-yong-mo-ren-da-yin-ji.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma">
-        <h2 class="post-title">能在马路上跑步吗？</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-10-31</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/M8cKEKr0K">
-                童言稚语
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma">
-        <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/neng-zai-ma-lu-shang-pao-bu-ma.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang">
-        <h2 class="post-title">我就静静地看你装</h2>
-      </a>
-      <div class="post-abstract">
-        <p>小宝从幼儿园回家，本来就在幼儿园吃过饭了，<br>
-宝妈为了让她再吃点绿叶菜，喝点粥，就说：<br>
-“今天张老师给我打电话了。”<br>
-宝就问：“老师说什么了”。<br>
-“说你在幼儿园表现特别好，爱劳动，积极回答问题，</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-10-31</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/oFNR_EL9n">
-                童言无忌
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang">
-        <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/wo-jiu-jing-jing-di-kan-ni-zhuang.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er">
-        <h2 class="post-title">小学生4位数进位加法竖式题（二）</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-10-30</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/dYLsqWL-Y">
-                Python
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er">
-        <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti">
-        <h2 class="post-title">小学生4位数进位加法竖式题（一）</h2>
-      </a>
-      <div class="post-abstract">
-        <p>老师👩‍🎓留作业要求家长每天要给小朋友👦出15道“4位数进位加法竖式题”，虽说这并不考验什么智商，但是每天要找张纸📝，一道道地出题，再加上我的字还是太入眼了，总这是让人不爽。<br>
-但是自从有了Python大法一切都简单了。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-10-30</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/dYLsqWL-Y">
-                Python
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti">
-        <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti.jpg')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang">
-        <h2 class="post-title">华硕RT-AC68U 梅林固件 科学上网</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-10-30</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/ny99dwwjT">
-                硬件
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://lemodd.github.io/tag/l5mPtJrLIP">
-                上网
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang">
-        <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://lemodd.github.io/post/hello-gridea">
-        <h2 class="post-title">Hello Gridea</h2>
-      </a>
-      <div class="post-abstract">
-        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2018-12-12</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://lemodd.github.io/tag/B-KXmtiiz">
-                Gridea
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://lemodd.github.io/post/hello-gridea">
-        <div class="feature-container" style="background-image: url('https://lemodd.github.io/post-images/hello-gridea.png')">
-        </div>
-      </a>
-    
-  </section>
-
-
-<div class="pagination-container">
-  
-  
-</div>
-
-
-      </div>
-
-      <div class="site-footer">
-  <div class="slogan">温故而知新</div>
   <div class="social-container">
     
       
@@ -384,26 +77,318 @@
       
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lemodd.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
+    
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/shu-mei-pai-pyecharts-qi-xiang-shu-ju-shou-ji-yu-ke-shi-hua">
+        <h2 class="post-title">树莓派 + pyecharts 气象数据收集与可视化</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-11-02
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/shu-mei-pai-pyecharts-qi-xiang-shu-ju-shou-ji-yu-ke-shi-hua" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/shu-mei-pai-pyecharts-qi-xiang-shu-ju-shou-ji-yu-ke-shi-hua.png')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>这个小“项目”已经稳定运行了1年多。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用ngix架设服务器后可通过页面浏览。申请公网IP后，出门时也可以查看数据。现在整理下制作过程与大家分享。</p>
 
-    </div>
-    <script type="application/javascript">
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/chi-ping-guo">
+        <h2 class="post-title">吃苹果</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-11-02
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/M8cKEKr0K" class="post-tag">
+            # 童言稚语
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        <p>宝妈给宝定了个规矩，每天吃一个苹果🍎。<br>
+一天，宝儿在忙着玩玩具，爷爷给宝儿削了个苹果，可是宝不愿意放下玩具🚀。<br>
+&quot;吃了苹果我给你买奥特曼。”，爷爷说。<br>
+宝儿不情愿地拿起了苹果。</p>
 
-hljs.initHighlightingOnLoad()
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/python-diao-yong-mo-ren-da-yin-ji">
+        <h2 class="post-title">Python调用默认打印机</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-31
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/TmWk-zpCt" class="post-tag">
+            # 办公
+          </a>
+        
+          <a href="https://lemodd.github.io/tag/dYLsqWL-Y" class="post-tag">
+            # Python
+          </a>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/python-diao-yong-mo-ren-da-yin-ji" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/python-diao-yong-mo-ren-da-yin-ji.png')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>  有时候需要打印很多资料，一个个手动打印直是繁琐又浪费时间，Python真是各种懒癌晚期的特效药💊啊。<br>
+  经过一翻搜索终于找到了方法。需要用到win32api和win32print两个模块。</p>
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma">
+        <h2 class="post-title">能在马路上跑步吗？</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-31
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/M8cKEKr0K" class="post-tag">
+            # 童言稚语
+          </a>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/neng-zai-ma-lu-shang-pao-bu-ma" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/neng-zai-ma-lu-shang-pao-bu-ma.png')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang">
+        <h2 class="post-title">我就静静地看你装</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-31
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/oFNR_EL9n" class="post-tag">
+            # 童言无忌
+          </a>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/wo-jiu-jing-jing-di-kan-ni-zhuang.png')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>小宝从幼儿园回家，本来就在幼儿园吃过饭了，<br>
+宝妈为了让她再吃点绿叶菜，喝点粥，就说：<br>
+“今天张老师给我打电话了。”<br>
+宝就问：“老师说什么了”。<br>
+“说你在幼儿园表现特别好，爱劳动，积极回答问题，</p>
+
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er">
+        <h2 class="post-title">小学生4位数进位加法竖式题（二）</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-30
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/dYLsqWL-Y" class="post-tag">
+            # Python
+          </a>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-shu-shi-ti-er.png')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti">
+        <h2 class="post-title">小学生4位数进位加法竖式题（一）</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-30
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/dYLsqWL-Y" class="post-tag">
+            # Python
+          </a>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/xiao-xue-sheng-4-wei-shu-jin-wei-jia-fa-chu-ti.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>老师👩‍🎓留作业要求家长每天要给小朋友👦出15道“4位数进位加法竖式题”，虽说这并不考验什么智商，但是每天要找张纸📝，一道道地出题，再加上我的字还是太入眼了，总这是让人不爽。<br>
+但是自从有了Python大法一切都简单了。</p>
+
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang">
+        <h2 class="post-title">华硕RT-AC68U 梅林固件 科学上网</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-30
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/ny99dwwjT" class="post-tag">
+            # 硬件
+          </a>
+        
+          <a href="https://lemodd.github.io/tag/l5mPtJrLIP" class="post-tag">
+            # 上网
+          </a>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang.png')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://lemodd.github.io/post/hello-gridea">
+        <h2 class="post-title">Hello Gridea</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2018-12-12
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://lemodd.github.io/tag/B-KXmtiiz" class="post-tag">
+            # Gridea
+          </a>
+        
+      </div>
+      
+        <a href="https://lemodd.github.io/post/hello-gridea" class="post-feature-image" style="background-image: url('https://lemodd.github.io/post-images/hello-gridea.png')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+
+      </div>
+    </article>
+  
+</div>
+
+    
+        <div class="pagination-container">
+  
+  
+</div>
+
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://lemodd.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
 
 </script>
 
-
-
-
+      </div>
+    </div>
   </body>
 </html>

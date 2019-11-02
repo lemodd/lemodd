@@ -1,23 +1,16 @@
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LEMO</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572699954973">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572685734153">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://lemodd.github.io/styles/main.css">
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151342724-1"></script>
@@ -32,82 +25,45 @@
 
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://lemodd.github.io">
-        <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572685734153" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://lemodd.github.io">
-        <h1 class="site-title">LEMO</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lemodd.github.io">
+  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572699954973" alt="">
+  </a>
+  <h1 class="site-title">
+    LEMO
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="/" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-        
-          <a href="/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-        
-          <a href="/post/about" class="menu purple-link">
-            关于
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-        <div class="content-container">
-          
-          <div class="tags-container">
-            
-              <a class="tag" href="https://lemodd.github.io/tag/M8cKEKr0K">童言稚语</a>
-            
-              <a class="tag" href="https://lemodd.github.io/tag/TmWk-zpCt">办公</a>
-            
-              <a class="tag" href="https://lemodd.github.io/tag/dYLsqWL-Y">Python</a>
-            
-              <a class="tag" href="https://lemodd.github.io/tag/oFNR_EL9n">童言无忌</a>
-            
-              <a class="tag" href="https://lemodd.github.io/tag/ny99dwwjT">硬件</a>
-            
-              <a class="tag" href="https://lemodd.github.io/tag/l5mPtJrLIP">上网</a>
-            
-              <a class="tag" href="https://lemodd.github.io/tag/B-KXmtiiz">Gridea</a>
-            
-          </div>
-
-        </div>
-
-        <div class="site-footer">
-  <div class="slogan">温故而知新</div>
   <div class="social-container">
     
       
@@ -121,27 +77,74 @@
       
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lemodd.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
 
-      </div>
-      <script type="application/javascript">
+        <div class="tags-container">
+          
+            <a class="tag" href="https://lemodd.github.io/tag/M8cKEKr0K">童言稚语</a>
+          
+            <a class="tag" href="https://lemodd.github.io/tag/TmWk-zpCt">办公</a>
+          
+            <a class="tag" href="https://lemodd.github.io/tag/dYLsqWL-Y">Python</a>
+          
+            <a class="tag" href="https://lemodd.github.io/tag/oFNR_EL9n">童言无忌</a>
+          
+            <a class="tag" href="https://lemodd.github.io/tag/ny99dwwjT">硬件</a>
+          
+            <a class="tag" href="https://lemodd.github.io/tag/l5mPtJrLIP">上网</a>
+          
+            <a class="tag" href="https://lemodd.github.io/tag/B-KXmtiiz">Gridea</a>
+          
+        </div>
 
-hljs.initHighlightingOnLoad()
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://lemodd.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
 
 </script>
 
-
-
-
+      </div>
     </div>
   </body>
 </html>
