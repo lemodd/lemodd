@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>树莓派 + pyecharts 气象数据收集与可视化 | LEMO</title>
 <meta name="description" content="温故而知新" />
-<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572699954973">
+<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572707984869">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://lemodd.github.io/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lemodd.github.io">
-  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572699954973" alt="">
+  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572707984869" alt="">
   </a>
   <h1 class="site-title">
     LEMO
@@ -89,7 +89,7 @@
                 2019-11-02
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
@@ -98,24 +98,12 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>这个小“项目”已经稳定运行了1年多。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用ngix架设服务器后可通过页面浏览。申请公网IP后，出门时也可以查看数据。现在整理下制作过程与大家分享。</p>
+                <p>这个小“项目”已经稳定运行了1年多。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用ngix架设服务器后可通过页面浏览。申请公网IP后，出门时也可以查看数据。</p>
 <!-- more -->
-<p><ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E7%A1%AC%E4%BB%B6%E6%B8%85%E5%8D%95">硬件清单</a></li>
-<li><a href="#%E8%BD%AF%E4%BB%B6%E6%B8%85%E5%8D%95">软件清单</a></li>
-<li><a href="#%E7%A1%AC%E4%BB%B6%E6%90%AD%E8%AE%BE">硬件搭设</a></li>
-<li><a href="#%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F">编写程序</a></li>
-<li><a href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE">路由器设置</a></li>
-</ul>
-</li>
-</ul>
-</p>
 <h2 id="硬件清单">硬件清单</h2>
-<pre><code>1. 树莓派 zero w
-2. ds18b20
-3. sht30
+<pre><code>1. 树莓派 Zero W
+2. ds18b20(ds1302)模块
+3. sht30模块
 </code></pre>
 <h2 id="软件清单">软件清单</h2>
 <pre><code>1. python
@@ -123,8 +111,40 @@
 3. ngix
 </code></pre>
 <h2 id="硬件搭设">硬件搭设</h2>
+<p>树莓派 zero w价格便宜，自带wifi模块，功能强大。到手后刷入官方lite版系统，不需要桌面。具体请参考教程，“<a href="http://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html">无屏幕和键盘配置树莓派WiFi和SSH</a>”。</p>
+<p>室外温度采用ds18b20模块，此模块为“单总线模块”，数据和电源共用一条线，加上地线共两条线，正好一根据电话线即可，接线见下图。<br>
+<img src="https://lemodd.github.io/post-images/1572705796037.png" alt=""></p>
+<p>sht30是盛世瑞恩出产的一款基于i2c传输协议的温、湿度传感器，联线比较简单，唯一需要注意的是它的电压是3.3V，不要接到5V上去了。</p>
 <h2 id="编写程序">编写程序</h2>
-<h2 id="路由器设置">路由器设置</h2>
+<h3 id="主程序">主程序</h3>
+<h3 id="获取室内温-度">获取室内温、度</h3>
+<pre><code class="language-python">import smbus
+import time
+
+def get():
+	bus = smbus.SMBus(1)
+	bus.write_i2c_block_data(0x44, 0x2C, [0x06])
+	time.sleep(0.5)
+	data = bus.read_i2c_block_data(0x44, 0x00, 6)
+	cTemp = ((((data[0] * 256.0) + data[1]) * 175) / 65535.0) - 45
+	humidity = 100 * (data[3] * 256 + data[4]) /65535.0
+    
+	return(round(cTemp,2),round(humidity,2))
+</code></pre>
+<h3 id="获取室外温度">获取室外温度</h3>
+<pre><code class="language-python">def getDs18b20():
+	with open(&quot;/sys/bus/w1/devices/28-000004b1dd3f/w1_slave&quot;) as f:
+		text = f.readlines()
+		secondline=text[1]
+		temp = secondline.split(&quot; &quot;)[9]
+		temp = temp.strip()
+		temp = float(temp[2:])/1000
+		return temp
+</code></pre>
+<h3 id="获取cpu温度">获取CPU温度</h3>
+<h3 id="开机运行supervisor">开机运行supervisor</h3>
+<h3 id="安装-设置ngix">安装、设置ngix</h3>
+<h2 id="外网访问设置">外网访问设置</h2>
 
               </div>
               <div class="toc-container">
@@ -134,8 +154,17 @@
 <li><a href="#%E7%A1%AC%E4%BB%B6%E6%B8%85%E5%8D%95">硬件清单</a></li>
 <li><a href="#%E8%BD%AF%E4%BB%B6%E6%B8%85%E5%8D%95">软件清单</a></li>
 <li><a href="#%E7%A1%AC%E4%BB%B6%E6%90%AD%E8%AE%BE">硬件搭设</a></li>
-<li><a href="#%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F">编写程序</a></li>
-<li><a href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE">路由器设置</a></li>
+<li><a href="#%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F">编写程序</a>
+<ul>
+<li><a href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F">主程序</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%AE%A4%E5%86%85%E6%B8%A9-%E5%BA%A6">获取室内温、度</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%AE%A4%E5%A4%96%E6%B8%A9%E5%BA%A6">获取室外温度</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96cpu%E6%B8%A9%E5%BA%A6">获取CPU温度</a></li>
+<li><a href="#%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8Csupervisor">开机运行supervisor</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-%E8%AE%BE%E7%BD%AEngix">安装、设置ngix</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E8%AE%BE%E7%BD%AE">外网访问设置</a></li>
 </ul>
 </li>
 </ul>
