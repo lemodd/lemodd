@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-11-02T09:07:00.951Z</updated>
+    <updated>2019-11-02T09:09:18.241Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -336,7 +336,7 @@ with open('hw.doc','w') as f:
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[华硕RT-AC68U 格林固件 科学上网]]></title>
+        <title type="html"><![CDATA[华硕RT-AC68U 梅林固件 科学上网]]></title>
         <id>https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang</id>
         <link href="https://lemodd.github.io/post/hua-shuo-rt-ac68u-ge-lin-gu-jian-ke-xue-shang-wang">
         </link>
