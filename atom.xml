@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-11-02T05:22:45.507Z</updated>
+    <updated>2019-11-02T06:12:26.493Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -10,6 +10,29 @@
     <logo>https://lemodd.github.io/images/avatar.png</logo>
     <icon>https://lemodd.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, LEMO</rights>
+    <entry>
+        <title type="html"><![CDATA[吃苹果]]></title>
+        <id>https://lemodd.github.io/post/chi-ping-guo</id>
+        <link href="https://lemodd.github.io/post/chi-ping-guo">
+        </link>
+        <updated>2019-11-02T05:28:21.000Z</updated>
+        <summary type="html"><![CDATA[<p>宝妈给宝定了个规矩，每天吃一个苹果🍎。<br>
+一天，宝儿在忙着玩玩具，爷爷给宝儿削了个苹果，可是宝不愿意放下玩具🚀。<br>
+&quot;吃了苹果我给你买奥特曼。”，爷爷说。<br>
+宝儿不情愿地拿起了苹果。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>宝妈给宝定了个规矩，每天吃一个苹果🍎。<br>
+一天，宝儿在忙着玩玩具，爷爷给宝儿削了个苹果，可是宝不愿意放下玩具🚀。<br>
+&quot;吃了苹果我给你买奥特曼。”，爷爷说。<br>
+宝儿不情愿地拿起了苹果。</p>
+<!-- more -->
+<p>不到一分钟就就对爷爷说：<br>
+“爷爷，我吃完了，可以去奥特曼了吧。”<br>
+爷爷说：“这么快就吃完了？”<br>
+宝说：“是呀，这个苹果就是核儿有点大。”<br>
+爷爷拿来一看，苹果只被了草地啃了一圈，剩下的全是核儿了😛。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python调用默认打印机]]></title>
         <id>https://lemodd.github.io/post/python-diao-yong-mo-ren-da-yin-ji</id>
@@ -97,12 +120,19 @@ if __name__ == &quot;__main__&quot;:
         <link href="https://lemodd.github.io/post/wo-jiu-jing-jing-di-kan-ni-zhuang">
         </link>
         <updated>2019-10-31T00:30:39.000Z</updated>
+        <summary type="html"><![CDATA[<p>小宝从幼儿园回家，本来就在幼儿园吃过饭了，<br>
+宝妈为了让她再吃点绿叶菜，喝点粥，就说：<br>
+“今天张老师给我打电话了。”<br>
+宝就问：“老师说什么了”。<br>
+“说你在幼儿园表现特别好，爱劳动，积极回答问题，</p>
+]]></summary>
         <content type="html"><![CDATA[<p>小宝从幼儿园回家，本来就在幼儿园吃过饭了，<br>
 宝妈为了让她再吃点绿叶菜，喝点粥，就说：<br>
 “今天张老师给我打电话了。”<br>
 宝就问：“老师说什么了”。<br>
-“说你在幼儿园表现特别好，爱劳动，积极回答问题，<br>
-现在也爱吃菜了，blabla...，所以把粥喝了，菜吃完吧😊”<br>
+“说你在幼儿园表现特别好，爱劳动，积极回答问题，</p>
+<!-- more -->
+<p>现在也爱吃菜了，blabla...，所以把粥喝了，菜吃完吧😊”<br>
 宝疑惑地说：“我怎么没听到？”。<br>
 “老师在外面打的，你怎么听得到”<br>
 宝一脸鄙视地说：“老师打电话的时候我就在旁边，<br>
