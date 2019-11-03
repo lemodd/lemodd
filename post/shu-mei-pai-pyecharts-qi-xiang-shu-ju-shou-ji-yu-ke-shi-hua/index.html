@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>树莓派 + pyecharts 气象数据收集与可视化 | LEMO</title>
 <meta name="description" content="温故而知新" />
-<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572707984869">
+<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572763950449">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://lemodd.github.io/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lemodd.github.io">
-  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572707984869" alt="">
+  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572763950449" alt="">
   </a>
   <h1 class="site-title">
     LEMO
@@ -89,7 +89,7 @@
                 2019-11-02
               </span>
               <span>
-                2 min read
+                6 min read
               </span>
               
             </div>
@@ -98,11 +98,11 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>这个小“项目”已经稳定运行了1年多。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用ngix架设服务器后可通过页面浏览。申请公网IP后，出门时也可以查看数据。</p>
+                <p>这个小“项目”已经稳定运行近2年了。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用ngix做服务器，可通过网页浏览。申请公网IP后，外出时也可以查看数据。</p>
 <!-- more -->
 <h2 id="硬件清单">硬件清单</h2>
 <pre><code>1. 树莓派 Zero W
-2. ds18b20(ds1302)模块
+2. ds18b20模块
 3. sht30模块
 </code></pre>
 <h2 id="软件清单">软件清单</h2>
@@ -111,14 +111,63 @@
 3. ngix
 </code></pre>
 <h2 id="硬件搭设">硬件搭设</h2>
-<p>树莓派 zero w价格便宜，自带wifi模块，功能强大。到手后刷入官方lite版系统，不需要桌面。具体请参考教程，“<a href="http://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html">无屏幕和键盘配置树莓派WiFi和SSH</a>”。</p>
-<p>室外温度采用ds18b20模块，此模块为“单总线模块”，数据和电源共用一条线，加上地线共两条线，正好一根据电话线即可，接线见下图。<br>
+<p>树莓派 zero w价格便宜，自带wifi模块，功能强大。到手后刷入官方lite版系统，不需要桌面。具体请参考教程，“<a href="http://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html">无屏幕和键盘配置树莓派WiFi和SSH</a>”。<br>
+<img src="https://lemodd.github.io/post-images/1572751460015.jpg" alt=""><br>
+室外温度采用ds18b20模块，此模块为“单总线模块”，数据和电源共用一条线，加上地线共两条线，正好一根据电话线即可，接线见下图。<br>
 <img src="https://lemodd.github.io/post-images/1572705796037.png" alt=""></p>
-<p>sht30是盛世瑞恩出产的一款基于i2c传输协议的温、湿度传感器，联线比较简单，唯一需要注意的是它的电压是3.3V，不要接到5V上去了。</p>
+<p>sht30是盛世瑞恩出产的一款基于i2c传输协议的温、湿度传感器，联线比较简单，唯一需要注意的是它的电压是3.3V，不要接到5V上去了。<br>
+<img src="https://lemodd.github.io/post-images/1572750668526.png" alt=""></p>
 <h2 id="编写程序">编写程序</h2>
-<h3 id="主程序">主程序</h3>
-<h3 id="获取室内温-度">获取室内温、度</h3>
-<pre><code class="language-python">import smbus
+<h3 id="1-主程序">1. 主程序</h3>
+<p>主程序调用各个模块的功能。</p>
+<ol>
+<li>获取温度、湿度等数据</li>
+<li>将获得的数据存入sqlite数据库</li>
+<li>利用用pycharts生成可视化数据</li>
+</ol>
+<pre><code class="language-python">#run.py
+import sys
+import time
+import genHtml2
+import rpi_stat
+import sht30
+import sys
+import sqlite3
+
+wait = 10
+interval = 60*10
+while True:
+    #取得当前时间
+	time_date = time.strftime(&quot;%Y/%m/%d&quot;,time.localtime())
+	time_time = time.strftime(&quot;%H:%M&quot;,time.localtime())
+	#取得CPU温度和负载
+	cpu_t =rpi_stat.getCPUTemp()
+	cpu_load = rpi_stat.getLoad()
+    #取得室内温、湿度
+    room_t, room_h = sht30.get()
+    #取得室外温度
+    out_t = getDs18b20()
+    #将数据存入数据库
+	cn = sqlite3.connect('weather.db')
+	cu = cn.cursor()
+	item = [None]
+	item.append(time_date)
+	item.append(time_time)
+	item.append(room_t)
+	item.append(out_t)
+	item.append(room_h)
+	item.append(cpu_t)
+	item.append(cpu_load)
+	item.append(volt)
+	cu.execute(&quot;INSERT INTO record values(?,?,?,?,?,?,?,?,?)&quot;, tuple(item))
+	cn.commit()
+	#生成pyecharts网页
+	genHtml2.gen()
+	time.sleep(interval)
+</code></pre>
+<h3 id="2-获取室内温-湿度">2. 获取室内温、湿度</h3>
+<pre><code class="language-python">#sht30.py
+import smbus
 import time
 
 def get():
@@ -131,7 +180,7 @@ def get():
     
 	return(round(cTemp,2),round(humidity,2))
 </code></pre>
-<h3 id="获取室外温度">获取室外温度</h3>
+<h3 id="3-获取室外温度">3. 获取室外温度</h3>
 <pre><code class="language-python">def getDs18b20():
 	with open(&quot;/sys/bus/w1/devices/28-000004b1dd3f/w1_slave&quot;) as f:
 		text = f.readlines()
@@ -141,10 +190,129 @@ def get():
 		temp = float(temp[2:])/1000
 		return temp
 </code></pre>
-<h3 id="获取cpu温度">获取CPU温度</h3>
-<h3 id="开机运行supervisor">开机运行supervisor</h3>
-<h3 id="安装-设置ngix">安装、设置ngix</h3>
+<h3 id="4-获取cpu温度和负载">4. 获取CPU温度和负载</h3>
+<pre><code class="language-python">rpi_stat.py
+import time
+import os
+
+def getCPUTemp():
+	with open(&quot;/sys/class/thermal/thermal_zone0/temp&quot;) as file:
+		res = file.readline()
+	return round(int(res)/1000,2)
+
+def getLoad():
+	res = os.popen(&quot;uptime&quot;).readline().split()[-3]
+	return int(float(res.replace(',',''))*100)
+</code></pre>
+<h3 id="5-使用pyecharts生成网页">5. 使用pyecharts生成网页</h3>
+<p>pyecharts的项目地址https://github.com/pyecharts/pyecharts，这里有详细的教程。</p>
+<p>安装 pyecharts<br>
+<code>pip install pyecharts</code></p>
+<pre><code class="language-python">#genHtml.py
+from pyecharts import Line,Page
+import platform
+import sqlite3
+import util
+
+def gen():
+    cn = sqlite3.connect('weather.db')
+    cu = cn.cursor()
+
+    textsize = 32
+    time_st = []
+    room_t = []
+    out_t = []
+    room_h = []
+    cpu_t = []
+    cpu_load = []
+    bat_volt = []
+
+    sql = &quot;SELECT *  FROM record order by id desc limit 100 &quot;
+    rec = cu.execute(sql)
+    # print(type(list(rec)))
+    lst = list(rec)
+    lst.reverse()
+
+    for line in lst:
+        tm_st = line[1][5:].replace(&quot;/&quot;,&quot;-&quot;) +&quot; &quot;+line[2]
+        time_st.append(tm_st)
+        room_t.append(line[3])
+        out_t.append(line[4])
+        room_h.append(line[5])
+        cpu_t.append(line[6])
+        cpu_load.append(line[7])
+        bat_volt.append(line[8])
+
+    page = Page(page_title=&quot;My RPi Center&quot;)
+
+    #数据总个数
+    amount = len(time_st)
+    #需要显示的个数(24小时)
+    display = 72
+    #display range
+    dis_range = int((1-display/amount)*100)
+#    print(amount)
+
+    line_room_t = Line(&quot;气温  %s/%s℃&quot;%(str(room_t[-1]),str(out_t[-1])),
+			title_pos='center',
+			title_text_size=textsize,
+			title_top='5%')
+    line_room_t.add(&quot;室温&quot;, time_st, room_t,
+             xaxis_name='时间',
+             yaxis_name='温度(℃)',
+             yaxis_name_pos='end',
+             xaxis_name_pos='end',
+             xaxis_label_textsize=textsize,
+             yaxis_label_textsize=textsize,
+	            label_text_size=textsize,
+                    label_emphasis_textsize=textsize,
+                    tooltip_font_size=textsize,
+                    mark_point_textsize=10,
+             is_label_show=True,
+             line_width = 3,
+             line_curve = 0.5,
+             is_datazoom_show=True,
+             datazoom_type='slider',
+                    datazoom_range=[80,100],
+             is_more_utils=True,
+             xaxis_force_interval=50,
+             yaxis_min=min(room_t)-5,
+             yaxis_max=max(room_t)+5,
+             tooltip_tragger='axis',
+             mark_point=['min','max'],
+             mark_line=['average'])
+
+    page.add(line_room_t)
+    ······
+    #太长了，在此省略，详见https://github.com/lemodd
+
+    #将页面保存到目录
+    page.render('/home/pi/www/index.html')
+</code></pre>
+<h3 id="6-完成">6. 完成</h3>
+<p>到此用浏览器打开生成的index.html文件就可以看到结果了。这样只能在本机上查看，为了能随时随地的查看，需要一个http服务器，别的电脑和手机就可以用浏览器查看了。</p>
+<h2 id="安装-配置nginx">安装、配置nginx</h2>
+<h3 id="1安装-nginx">1.安装 nginx</h3>
+<p>在终端运行命令<br>
+<code>sudo apt-get install nginx</code></p>
+<p>一路确认，即可完成安装。</p>
+<p>启动Nginx<br>
+<code>sudo /etc/init.d/nginx start</code><br>
+可通过<em>http://树莓派IP</em>访问到 Nginx 的默认页。如果出现下图则说明nginx安装成功。<br>
+<img src="https://lemodd.github.io/post-images/1572758677712.png" alt=""></p>
+<h3 id="2-配置nginx">2. 配置nginx</h3>
+<p>修改 nginx 的配置文件<br>
+<code>sudo nano /etc/nginx/sites-available/default</code></p>
+<p>默认路径 html 所在路径，修改为你自己的。<br>
+<code>root /home/pi/www/</code></p>
+<p>监听的端口号，如果与其它软件冲突，可以在这里更改。<br>
+<code>listen 80 default_server</code></p>
+<p>重新加载<br>
+<code>sudo /etc/init.d/nginx reload</code></p>
+<p>再次打开树莓派IP，如果没有错误，就可以看到刚才生成的图表了。<br>
+<img src="https://lemodd.github.io/post-images/1572759987353.png" alt=""></p>
 <h2 id="外网访问设置">外网访问设置</h2>
+<h2 id="开机运行supervisor">开机运行supervisor</h2>
 
               </div>
               <div class="toc-container">
@@ -156,15 +324,22 @@ def get():
 <li><a href="#%E7%A1%AC%E4%BB%B6%E6%90%AD%E8%AE%BE">硬件搭设</a></li>
 <li><a href="#%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F">编写程序</a>
 <ul>
-<li><a href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F">主程序</a></li>
-<li><a href="#%E8%8E%B7%E5%8F%96%E5%AE%A4%E5%86%85%E6%B8%A9-%E5%BA%A6">获取室内温、度</a></li>
-<li><a href="#%E8%8E%B7%E5%8F%96%E5%AE%A4%E5%A4%96%E6%B8%A9%E5%BA%A6">获取室外温度</a></li>
-<li><a href="#%E8%8E%B7%E5%8F%96cpu%E6%B8%A9%E5%BA%A6">获取CPU温度</a></li>
-<li><a href="#%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8Csupervisor">开机运行supervisor</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85-%E8%AE%BE%E7%BD%AEngix">安装、设置ngix</a></li>
+<li><a href="#1-%E4%B8%BB%E7%A8%8B%E5%BA%8F">1. 主程序</a></li>
+<li><a href="#2-%E8%8E%B7%E5%8F%96%E5%AE%A4%E5%86%85%E6%B8%A9-%E6%B9%BF%E5%BA%A6">2. 获取室内温、湿度</a></li>
+<li><a href="#3-%E8%8E%B7%E5%8F%96%E5%AE%A4%E5%A4%96%E6%B8%A9%E5%BA%A6">3. 获取室外温度</a></li>
+<li><a href="#4-%E8%8E%B7%E5%8F%96cpu%E6%B8%A9%E5%BA%A6%E5%92%8C%E8%B4%9F%E8%BD%BD">4. 获取CPU温度和负载</a></li>
+<li><a href="#5-%E4%BD%BF%E7%94%A8pyecharts%E7%94%9F%E6%88%90%E7%BD%91%E9%A1%B5">5. 使用pyecharts生成网页</a></li>
+<li><a href="#6-%E5%AE%8C%E6%88%90">6. 完成</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AEnginx">安装、配置nginx</a>
+<ul>
+<li><a href="#1%E5%AE%89%E8%A3%85-nginx">1.安装 nginx</a></li>
+<li><a href="#2-%E9%85%8D%E7%BD%AEnginx">2. 配置nginx</a></li>
 </ul>
 </li>
 <li><a href="#%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E8%AE%BE%E7%BD%AE">外网访问设置</a></li>
+<li><a href="#%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8Csupervisor">开机运行supervisor</a></li>
 </ul>
 </li>
 </ul>
