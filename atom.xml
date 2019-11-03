@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-11-03T08:06:18.312Z</updated>
+    <updated>2019-11-03T08:21:38.622Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -135,7 +135,8 @@ def getLoad():
 	return int(float(res.replace(',',''))*100)
 </code></pre>
 <h3 id="5-使用pyecharts生成网页">5. 使用pyecharts生成网页</h3>
-<p>pyecharts的项目地址https://github.com/pyecharts/pyecharts，这里有详细的教程。</p>
+<p>pyecharts是一款将python与echarts结合的强大的数据可视化工具，是Python数据可视化利器！<br>
+项目地址<a href="https://github.com/pyecharts/pyecharts">https://github.com/pyecharts/pyecharts</a>，有详细的教程。</p>
 <p>安装 pyecharts<br>
 <code>pip install pyecharts</code></p>
 <pre><code class="language-python">#genHtml.py
