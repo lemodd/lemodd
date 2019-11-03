@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-11-03T07:45:46.926Z</updated>
+    <updated>2019-11-03T08:03:53.768Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -11,14 +11,16 @@
     <icon>https://lemodd.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, LEMO</rights>
     <entry>
-        <title type="html"><![CDATA[树莓派 + pyecharts 气象数据收集与可视化]]></title>
+        <title type="html"><![CDATA[树莓派 + pyecharts 气象数据收集与可视化  (Using Raspberry Pi and pyecharts for weather data collection and visualization)]]></title>
         <id>https://lemodd.github.io/post/shu-mei-pai-pyecharts-qi-xiang-shu-ju-shou-ji-yu-ke-shi-hua</id>
         <link href="https://lemodd.github.io/post/shu-mei-pai-pyecharts-qi-xiang-shu-ju-shou-ji-yu-ke-shi-hua">
         </link>
         <updated>2019-11-02T11:59:06.000Z</updated>
-        <summary type="html"><![CDATA[<p>这个小“项目”已经稳定运行近2年了。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用ngix做服务器，可通过网页浏览。申请公网IP后，外出时也可以查看数据。</p>
+        <summary type="html"><![CDATA[<p>这个小“项目”已经稳定运行近2年了。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用nginx做服务器，可通过网页浏览。申请公网IP后，外出时也可以查看数据。</p>
+<p><strong>Using Raspberry Pi and pyecharts for weather data collection and visualization.</strong></p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>这个小“项目”已经稳定运行近2年了。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用ngix做服务器，可通过网页浏览。申请公网IP后，外出时也可以查看数据。</p>
+        <content type="html"><![CDATA[<p>这个小“项目”已经稳定运行近2年了。主要特性是树莓派将收集的室内温度、湿度和室外温度以及CPU温度等数据存入sqlite数据库，利用pyecharts进行数据可视化，用nginx做服务器，可通过网页浏览。申请公网IP后，外出时也可以查看数据。</p>
+<p><strong>Using Raspberry Pi and pyecharts for weather data collection and visualization.</strong></p>
 <!-- more -->
 <h2 id="硬件清单">硬件清单</h2>
 <pre><code>1. 树莓派 Zero W
@@ -28,7 +30,7 @@
 <h2 id="软件清单">软件清单</h2>
 <pre><code>1. python
 2. pyecharts
-3. ngix
+3. nginx
 </code></pre>
 <h2 id="硬件搭设">硬件搭设</h2>
 <p>树莓派 zero w价格便宜，自带wifi模块，功能强大。到手后刷入官方lite版系统，不需要桌面。具体请参考教程，“<a href="http://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html">无屏幕和键盘配置树莓派WiFi和SSH</a>”。<br>
@@ -268,7 +270,7 @@ stdout_logfile_backups=10
 <code>sudo supervisorctl</code></p>
 <p>可以看到正在运行的进程。用help命令可以查看常用的命令。</p>
 <h2 id="结束">结束</h2>
-<p>项目的所有源码在https://github.com/lemodd/raspberrypi-pyecharts</p>
+<p>项目的所有源码在<a href="https://github.com/lemodd/raspberrypi-pyecharts">https://github.com/lemodd/raspberrypi-pyecharts</a></p>
 ]]></content>
     </entry>
     <entry>
