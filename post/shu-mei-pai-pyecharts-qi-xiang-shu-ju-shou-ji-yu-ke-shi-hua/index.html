@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>树莓派 + pyecharts 气象数据收集与可视化  (Using Raspberry Pi and pyecharts for weather data collection and visualization) | LEMO</title>
 <meta name="description" content="温故而知新" />
-<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572768207440">
+<link rel="shortcut icon" href="https://lemodd.github.io/favicon.ico?v=1572768350354">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://lemodd.github.io/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lemodd.github.io">
-  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572768207440" alt="">
+  <img class="avatar" src="https://lemodd.github.io/images/avatar.png?v=1572768350354" alt="">
   </a>
   <h1 class="site-title">
     LEMO
@@ -112,12 +112,20 @@
 3. nginx
 </code></pre>
 <h2 id="硬件搭设">硬件搭设</h2>
+<ol>
+<li>
 <p>树莓派 zero w价格便宜，自带wifi模块，功能强大。到手后刷入官方lite版系统，不需要桌面。具体请参考教程，“<a href="http://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html">无屏幕和键盘配置树莓派WiFi和SSH</a>”。<br>
-<img src="https://lemodd.github.io/post-images/1572751460015.jpg" alt=""><br>
-室外温度采用ds18b20模块，此模块为“单总线模块”，数据和电源共用一条线，加上地线共两条线，正好一根据电话线即可，接线见下图。<br>
+<img src="https://lemodd.github.io/post-images/1572751460015.jpg" alt=""></p>
+</li>
+<li>
+<p>室外温度采用ds18b20模块，此模块为“单总线模块”，数据和电源共用一条线，加上地线共两条线，正好一根据电话线即可，接线见下图。<br>
 <img src="https://lemodd.github.io/post-images/1572705796037.png" alt=""></p>
+</li>
+<li>
 <p>sht30是盛世瑞恩出产的一款基于i2c传输协议的温、湿度传感器，联线比较简单，唯一需要注意的是它的电压是3.3V，不要接到5V上去了。<br>
 <img src="https://lemodd.github.io/post-images/1572750668526.png" alt=""></p>
+</li>
+</ol>
 <h2 id="编写程序">编写程序</h2>
 <h3 id="1-主程序">1. 主程序</h3>
 <p>主程序调用各个模块的功能。</p>
