@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lemodd.github.io</id>
     <title>LEMO</title>
-    <updated>2019-11-03T06:53:11.487Z</updated>
+    <updated>2019-11-03T07:45:46.926Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lemodd.github.io"/>
     <link rel="self" href="https://lemodd.github.io/atom.xml"/>
@@ -212,13 +212,17 @@ def gen():
 <h3 id="6-完成">6. 完成</h3>
 <p>到此用浏览器打开生成的index.html文件就可以看到结果了。这样只能在本机上查看，为了能随时随地的查看，需要一个http服务器，别的电脑和手机就可以用浏览器查看了。</p>
 <h2 id="安装-配置nginx">安装、配置nginx</h2>
+<blockquote>
+<p><strong>百度百科</strong><br>
+Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+</blockquote>
 <h3 id="1安装-nginx">1.安装 nginx</h3>
 <p>在终端运行命令<br>
 <code>sudo apt-get install nginx</code></p>
 <p>一路确认，即可完成安装。</p>
 <p>启动Nginx<br>
-<code>sudo /etc/init.d/nginx start</code><br>
-可通过<em>http://树莓派IP</em>访问到 Nginx 的默认页。如果出现下图则说明nginx安装成功。<br>
+<code>sudo /etc/init.d/nginx start</code></p>
+<p>可通过<em>http://树莓派IP</em>访问到 Nginx 的默认页。如果出现下图则说明nginx安装成功。<br>
 <img src="https://lemodd.github.io/post-images/1572758677712.png" alt=""></p>
 <h3 id="2-配置nginx">2. 配置nginx</h3>
 <p>修改 nginx 的配置文件<br>
@@ -232,7 +236,39 @@ def gen():
 <p>再次打开树莓派IP，如果没有错误，就可以看到刚才生成的图表了。<br>
 <img src="https://lemodd.github.io/post-images/1572759987353.png" alt=""></p>
 <h2 id="外网访问设置">外网访问设置</h2>
-<h2 id="开机运行supervisor">开机运行supervisor</h2>
+<p>到目前只能在家里的局域网访问，为了能在外网顺利访问到还需以下几步。</p>
+<h3 id="1-获取公网ip">1. 获取公网IP</h3>
+<p>为了可以获得公网IP直接打宽带运营商的客服电话，一般会直接告诉你如何设置。不同的运营商和地区各有不同，我所在城市只需在用户名后加数字8即可变为外网IP。</p>
+<h3 id="2-设置端口转发">2. 设置端口转发</h3>
+<p>即便获得了公网IP,80端口也是屏蔽的，需要设置下端口转发，我用的华硕RT-AC68U路由器，外网端口设的8000，如下：<br>
+<img src="https://lemodd.github.io/post-images/1572764972551.png" alt=""></p>
+<p>在路由器的互联网态中查到你的公网IP，访问地址 http://公网IP:8000，如果能看到图表，说明一切设置无误。这时在任何可以上网的地方都能查到家里的数据了。</p>
+<h3 id="3-ddns设置">3. DDNS设置</h3>
+<p>虽然现在可以在外网访问了，但是外网IP是不断变化的，每次拨号都会分配一个新的IP。为了能像一般网站一样用域名访问，只需设置下DDNS就可以了，打开路由器的DDNS设置，取一个别人没占用的名字。<br>
+<img src="https://lemodd.github.io/post-images/1572765673271.png" alt=""></p>
+<p>以后都可以通过http://xxx.asuscomm.com:8000 来访问你的网站了。</p>
+<h2 id="配置supervisor">配置supervisor</h2>
+<p>为了保证应用一直处于运行状态，在遇到断电、程序异常、报错等情况，导致应用终止时，需要保证程序可以立刻重启，继续提供服务。所以，就需要一个工具，时刻监控应用的运行情况，管理该进程。</p>
+<p>Supervisor 就是解决这种需求的工具，可以保证程序崩溃后，重新把程序启动起来等功能。</p>
+<p>安装supervisor<br>
+<code>sudo apt-get install supervisor</code></p>
+<p>新建配置文件<br>
+<code>sudo nano /etc/supervisor/conf.d/raspi-echarts.conf</code></p>
+<p>主要设置如下</p>
+<pre><code class="language-bash">user=pi
+command=/usr/bin/python3 run.py ; 要运行的命令
+directory=/home/pi/py/echarts/  ; 程序所在的目录
+autorestart=True                ; 程序异常退出后自动重启
+autostart=True                  ; 在 supervisord 启动的时候也自动启动
+stdout_logfile=/var/log/supervisor/echarts.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=10
+</code></pre>
+<p>进入supervisorctl客户端，查看状态和管理<br>
+<code>sudo supervisorctl</code></p>
+<p>可以看到正在运行的进程。用help命令可以查看常用的命令。</p>
+<h2 id="结束">结束</h2>
+<p>项目的所有源码在https://github.com/lemodd/raspberrypi-pyecharts</p>
 ]]></content>
     </entry>
     <entry>
